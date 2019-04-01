@@ -65,15 +65,101 @@ public class DynamicProgram {
 	printLcs(c, a, m, n);
 	printAll(c, a, m, n, "");
     }
+
+    
     
     static public void main(String[] args) {
-	String a = "ABCBDAB";
+	/*	String a = "ABCBDAB";
 	String b = "BDCABA";
 	print(a);
 	print(b);
 	print(a.length());
 	DynamicProgram dp = new DynamicProgram();
-	dp.lcs(a.toCharArray(), b.toCharArray());
-	print('a'=='a' );
+	dp.lcs(a.toCharArray(), b.toCharArray());*/
+	//	print(Double.NEGATIVE_INFINITY);
+	if (args.length < 1) {
+	    print("please input length");
+	    return;
+	}
+	int length = Integer.parseInt(args[0]);
+	Cutting cut = new Cutting();
+	print("length: " + length);
+	//	print("price: " + cut.topUpCut(length));
+	//	print("bottom price" + cut.bottomDownCut(length));
+	print(cut.extendedCut(length));
+	print(cut.count);
+	print(cut.array);
+	
     }
+
+}
+
+
+class Cutting {
+    int segment;
+    int count;
+    int[] array;
+    int[] price = {-1, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
+    int[] cut;
+    {
+	array = new int[price.length];
+	cut = new int[price.length];
+	array[0] = 0;
+	for(int i = 1; i < array.length; i++)
+	    array[i] = -1;
+    }
+        
+    int max(int x, int y) {
+	return x > y ? x : y;
+    }
+
+    void cutMethod(int length) {
+	if (length == 0)
+	    return;
+	printnb(cut[length]);
+	//print(length-cut[length]);
+	cutMethod(length - cut[length]);
+    }
+    
+    int extendedCut(int length) {
+	int income = 0;
+	for (int i = 1; i <= length; i++) {
+	    for (int j = 1; j <= i; j++) {
+		if (income < price[j] + array[i-j]) {
+		    cut[i] = j;
+		    income = price[j] + array[i-j];
+		}
+	    }
+	    array[i] = income;
+	}
+	print(cut);
+	cutMethod(length);
+	print("--");
+	return array[length];
+    }
+    
+    int bottomDownCut(int length) {
+	int income = 0;
+	for (int i = 1; i <= length; i++) {
+	    for (int j = 1; j <= i; j++) {
+		count++;
+		income = max(income, price[j] + array[i-j]);
+	    }
+	    array[i] = income;
+	}
+	return array[length];
+    }
+    
+    int topUpCut(int length) {
+	int income = 0;
+	if (array[length] != -1)
+	    return array[length];
+	for (int i = 1; i <= length; i++) {
+	    count++;
+	    income = max(price[i] + topUpCut(length-i), income);
+	}
+	array[length] = income;
+	return income;
+    }
+    
 }
