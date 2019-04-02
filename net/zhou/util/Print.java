@@ -16,6 +16,20 @@ public class Print {
 	System.out.println();
     }
 
+    public static void print(int[][] array) {
+	for (int[] row : array) {
+	    print(row);
+	}
+    }
+
+    public static void print(char[] array) {
+	for (char c : array) {
+	    System.out.print(c);
+	    System.out.print(' ');
+	}
+	System.out.println();
+    }
+
     public static void printnb(Object obj){
         System.out.print(obj);
         System.out.print(' ');
