@@ -8,7 +8,6 @@ public class Practice {
 	int base = array[start];
 	int i=start+1;
 	while (i <= end) {
-	    print(i);
 	    if (array[i++] < base){
 		array[start++] = array[i-1];
 		array[i-1] = array[start];
@@ -96,6 +95,8 @@ public class Practice {
 	print(pq.heap);
 	for (int i = 0; i < a.length; i++)
 	    printnb(pq.pop());
+	print((3/2));
+	print(new Float(3));
 	/*	int[] a = {1, 3, 2, 5, 0, 10, -100};
 	quickSort(a, 0, a.length-1);
 	print(a);*/

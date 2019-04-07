@@ -13,7 +13,14 @@ public class SearchTree {
     //    private Node head = null;
     private Node head; // initialize null
     
-
+    void inOrderTraversal(Node node) {
+	if (null == node)
+	    return;
+	inOrderTraversal(node.left);
+	print(node.element);
+	inOrderTraversal(node.right);
+    }
+    
     private Node insert(Node node, int X) {
 	if (null == node)
 	    return new Node(X);
@@ -105,7 +112,7 @@ public class SearchTree {
 	print(st.head);
 	print(st.findElement(array[4]));
 	print(st.findElement(19));
-	
+	st.inOrderTraversal(st.head);
 	
     }
     
