@@ -12,6 +12,22 @@ public class Range {
 	return array;
     }
 
+    public static int[] range(int start, int end, int step) {
+	int[] array = new int[end - start];
+	for (int i = start, j = 0; i < end; i += step)
+	    array[j++] = i;
+	return array;
+    }
+
+    public static int[] range(int start, int end) {
+	int[] array = new int[end - start];
+	for (int i = start; i < end; i++)
+	    array[i-start] = i;
+	return array;
+    }
+
+    
+    
     public static class TestRange {
 	public static void main(String[] args) {
 	    int[] array = range(10);
