@@ -91,13 +91,36 @@ public class Practice {
     
     static public void main(String[] args) {
 	int[] a = shuttleArray(10, 100);
-	print(a);
+	/*print(a);
 	PriorityQueue pq = new PriorityQueue(a);
 	print(pq.heap);
 	for (int i = 0; i < a.length; i++)
-	    printnb(pq.pop());
+	    printnb(pq.pop());*/
 	/*	int[] a = {1, 3, 2, 5, 0, 10, -100};
 	quickSort(a, 0, a.length-1);
 	print(a);*/
+	int[] a1 = {0,0,1,1,1,2,2,3,3,4};
+	int length = ReDuplication.reDuplicateSorted(a1);
+	for (int i = 0; i < length; i++) {
+	    printnb(a1[i]);
+	}
+    }
+}
+
+
+class ReDuplication {
+
+    public static int reDuplicateSorted(int[] array) {
+	if (array.length == 0)
+	    return -1;
+	int i, j, last = array[0];
+	for (i = 1, j = 1; i < array.length; i++) {
+	    if (last != array[i]) {
+		last = array[i];
+		if (i > j)
+		    array[j++] = array[i];
+	    }
+	}
+	return j;
     }
 }
